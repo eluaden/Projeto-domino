@@ -6,14 +6,15 @@ from basic_players import Player
 class NonePLayer(Player):
 
     def __init__(self):
-        super().__init__(0, "Ninguém")
+        super().__init__(0, "teste")
 
     def play(self, board_extremes, play_hist):
-        return 1, None
-		
+        return 0,None
+    
+    
 # Função que define o nome da dupla:
 def pair_name():
-    return "algum nome" # Defina aqui o nome da sua dupla
+    return "teste" # Defina aqui o nome da sua dupla
 
 # Função que cria a dupla:
 def create_pair():
