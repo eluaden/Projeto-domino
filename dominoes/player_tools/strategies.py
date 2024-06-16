@@ -1,34 +1,40 @@
 #possiveis estrategias a serem tomadas durante a partida pelos players(que podem trocar de estrategia a qualquer momento)
 
-class Strategy:
-    def __init__(self) -> None:
-        pass
+def super_greedy(playable_tiles, player_tiles):
+    # Primeiro, seleciona as peças com a maior soma
+    tile_sum = -1
+    greater_tiles = []
+    for tile in playable_tiles:
+        current_sum = tile[0] + tile[1]
+        if current_sum > tile_sum:
+            greater_tiles = [tile]
+            tile_sum = current_sum
+        elif current_sum == tile_sum:
+            greater_tiles.append(tile)
+
+    # Se houver mais de uma peça com a maior soma, desempate baseado na variedade
+    if len(greater_tiles) > 1:
+        # Conta a frequência de cada face nas peças do jogador
+        face_count = {i: 0 for i in range(10)}
+        for tile in player_tiles:
+            face_count[tile[0]] += 1
+            face_count[tile[1]] += 1
+
+        # Escolhe a peça que possui a face mais comum
+        best_tile = max(greater_tiles, key=lambda tile: face_count[tile[0]] + face_count[tile[1]])
+    elif len(greater_tiles) == 1:
+        best_tile = greater_tiles[0]
+    else:
+        best_tile = None
+
+    return [best_tile]
+
+def blocker(playable_tiles,probably_dont):
+    block = []
+    for tile in playable_tiles:
+        if tile in probably_dont:
+            block.append(tile)
+    if len(block) == 0:
+        block = playable_tiles
+    return block
     
-    def choose_tile(playable_tiles,board_extremes):
-        return 0,None
-
-
-class Greedy (Strategy): #estrategia bota gorda
-    def __init__(self) -> None:
-        super().__init__()
-
-    def choose_tile(self,playable_tiles, board_extremes):
-
-        tile_sum = -1
-        for tile in playable_tiles: # seleciona o maior dos tiles e joga ele
-            if tile[0] + tile[1] > tile_sum:
-                greater_tile = tile
-                tile_sum = tile[0] + tile[1]
-
-        for i in range(2):
-            for j in range(2): # verifica o lado a ser jogado(talvez possa ser descartado pq o juiz pode corrigir o lado)
-                if greater_tile[j] == board_extremes[i]:
-                    return i,greater_tile
-
-
-class FirstPlay (Strategy): #estrategia que escolhe a melhor das suas peças a ser jogada NA PRIMEIRA JOGADA!!
-    def __init__(self) -> None:
-        super().__init__()
-    
-    def choose_tile(playable_tiles, board_extremes):
-        return 
