@@ -1,0 +1,1 @@
+projeto feito pra materia de introdução a algoritimos na unicamp, fiz apenas o students_players e o player_tools, basicamente sao 2 jogadores de domino cubano, um que sempre tenta bloquear o proximo e outro que joga a melhor peça da sua mão baseado em pesoss como: a soma total dos numeros na peça e a variedade da peça na sua mão.
